@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;700&display=swap');
+
+body {
+    font-family: 'Lexend', sans-serif;
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.container {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1000px;
+}
+
+textarea {
+    width: 90%;
+    height: 900px;
+    max-height: 80vh;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    resize: none;
+    background-color: #222;
+    color: #fff;
+}
+
+textarea:focus {
+    border-color: #666;
+}
+
+#messageContainer {
+    height: 30px; /* Fixed height to prevent shifting on first appearance */
+    margin-top: 20px;
+}
+
+#warning {
+    font-size: 18px;
+    visibility: hidden;
+}
+
+#timeUp {
+    color: #F0E68C; /* Soft yellow */
+    font-size: 24px;
+}
+
+.shake {
+    animation: shake 0.2s;
+    animation-iteration-count: 1;
+}
+
+@keyframes shake {
+    0% { transform: translate(0.5px, 0.5px) rotate(0deg); }
+    10% { transform: translate(-0.5px, -1px) rotate(-1deg); }
+    40% { transform: translate(-1px, 0px) rotate(1deg); }
+    80% { transform: translate(1px, 1px) rotate(0deg); }
+    100% { transform: translate(0.5px, -0.5px) rotate(1deg); }
+}
+
+.timer-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* force constant size */
+    height: 45px;
+}
+
+.timer-setting.hidden, .timerDisplay.hidden {
+    display: none; /* Only show one at a time */
+}
+
+.timer-setting {
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#timerInput {
+    width: 60px;
+    padding: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #666;
+    background-color: #444;
+    color: #fff;
+    outline: none;
+    text-align: center;
+    font-family: 'Lexend', sans-serif;
+}
+
+#startTimerButton {
+    padding: 5px 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #666;
+    background-color: #444;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Lexend', sans-serif;
+}
+
+#startTimerButton:hover {
+    background-color: #555;
+}
+
+#timerDisplay {
+    font-size: 24px;
+    color: white; /* Time label color */
+    display: none; /* Hidden initially */
+}
+
+#timerDisplay.show {
+    display: flex; /* Show when the timer starts */
+}
+
+.time-label {
+    color: white; /* "Time remaining:" label color */
+}
+
+#timeRemaining {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    color: #F0E68C;
+    font-variant-numeric: tabular-nums;
+}
+
+.wordcount {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #ccc;
+    text-align: center;
+}
+
+.wordcount.low {
+    color: #f88;
+}

@@ -1,0 +1,30 @@
+<!-- FILEPATH: /c:/Users/linus/Projects/writer/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>write</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="wordCount" class="wordcount">Word count: 0</div>
+        <textarea id="writingArea" placeholder="Start writing..."></textarea>
+        <div id="messageContainer">
+            <div id="warning"></div>
+        </div>
+        <div id="timerOrSetting" class="timer-container">
+            <div id="timerSetting" class="timer-setting">
+                <label for="timerInput">Set timer (minutes): </label>
+                <input type="number" id="timerInput" min="1" value="1">
+                <button id="startTimerButton">Start Timer</button>
+            </div>
+            <div id="timerDisplay" class="hidden">
+                <span class="time-label">Time remaining:</span>&nbsp;<span id="timeRemaining"></span>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
