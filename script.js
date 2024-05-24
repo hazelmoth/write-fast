@@ -9,8 +9,8 @@ const timerSetting = document.getElementById('timerSetting');
 const timerDisplay = document.getElementById('timerDisplay');
 
 let lastTypedTime;
-let typingInterval = 5000;
-let warningInterval = 2000;
+let typingInterval = 9000;
+let warningInterval = 4000;
 let countdownInterval;
 let remainingTime = 0;
 let timerRunning = false;
@@ -18,7 +18,7 @@ let highestCharacterCount = 0;
 
 function updateLastTypedTime() {
     lastTypedTime = Date.now();
-    warning.style.visibility = 'hidden';
+    warning.style.opacity = 0;
 }
 
 function updateWordCount() {
@@ -52,12 +52,9 @@ function countdown() {
             timerDisplay.classList.remove('show');
             timerDisplay.classList.add('hidden');
             timerSetting.classList.remove('hidden');
-            warning.style.color = '#F0E68C';
+            warning.classList.remove('timeWarning');
             warning.textContent = "Time's up!";
-            warning.style.visibility = 'visible';
-            // setTimeout(() => {
-            //     warning.style.visibility = 'hidden';
-            // }, 3000);
+            warning.style.opacity = 1;
         }
     }, 1000);
 }
@@ -69,16 +66,27 @@ function formatTime(seconds) {
 }
 
 writingArea.addEventListener('keydown', (event) => {
-    const isDeleteKey = event.key === 'Delete' || event.key === 'Backspace';
-    setTimeout(updateWordCount, 0);
-    if (timerRunning && !isDeleteKey) {
-        const currentCharacterCount = writingArea.value.length + 1;
-        if (currentCharacterCount > highestCharacterCount) {
-            highestCharacterCount = currentCharacterCount;
-            updateLastTypedTime();
-        }
+    // Capture tabs
+    if (event.key === 'Tab') {
+        event.preventDefault();
+        const tabStart = writingArea.selectionStart;
+        const text = writingArea.value;
+        writingArea.value = text.substring(0, tabStart) + '\t' + text.substring(tabStart);
+        writingArea.selectionStart = writingArea.selectionEnd = tabStart + 4;
     }
+
+    setTimeout(handleTextChange, 0);
 });
+
+function handleTextChange() {
+    const characterCount = writingArea.value.length;
+    if (characterCount > highestCharacterCount) {
+        highestCharacterCount = characterCount;
+        updateLastTypedTime();
+    }
+
+    updateWordCount();
+}
 
 startTimerButton.addEventListener('click', startTimer);
 
@@ -89,23 +97,22 @@ function checkTyping() {
             const text = writingArea.value;
             if (text.length > 0) {
                 writingArea.value = text.substring(0, text.length - 3);
-                highestCharacterCount = writingArea.value.length; // Reset highest character count when text is destroyed
                 document.body.classList.add('shake');
                 setTimeout(() => document.body.classList.remove('shake'), 300);
             }
+            highestCharacterCount = writingArea.value.length; // Reset highest character count when text is destroyed
             updateWordCount(); // Ensure word count updates after destruction
-            warning.style.color = 'red';
+            warning.classList.add('timeWarning');
             warning.textContent = "Keep typing or your text will start to disappear!";
-            warning.style.visibility = 'visible';
+            warning.style.opacity = 1;
         } else if (currentTime - lastTypedTime >= warningInterval) {
-            warning.style.color = 'red';
+            warning.classList.add('timeWarning');
             warning.textContent = "Keep typing or your text will start to disappear!";
-            warning.style.visibility = 'visible';
+            warning.style.opacity = 1;
         } else {
-            warning.style.visibility = 'hidden';
+            warning.style.opacity = 0;
         }
     } else {
-        //warning.style.visibility = 'hidden';
     }
 }
 

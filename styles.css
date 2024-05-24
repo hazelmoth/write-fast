@@ -24,18 +24,19 @@ textarea {
     height: 900px;
     max-height: 80vh;
     margin-top: 20px;
-    padding: 10px;
-    font-size: 20px;
-    border: 2px solid #ccc;
+    padding: 20px;
+    font-size: 18px;
+    border: 2px solid #444;
     border-radius: 5px;
     outline: none;
     resize: none;
     background-color: #222;
-    color: #fff;
+    color: #e0e0e0;
+    font-family: Courier, monospace;
 }
 
 textarea:focus {
-    border-color: #666;
+    border-color: #555;
 }
 
 #messageContainer {
@@ -45,7 +46,14 @@ textarea:focus {
 
 #warning {
     font-size: 18px;
-    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.1s;
+    color: #F0E68C;
+}
+
+#warning.timeWarning {
+    color: #f88;
+    transition: opacity 0.2s;
 }
 
 #timeUp {
@@ -143,8 +151,10 @@ textarea:focus {
     font-size: 14px;
     color: #ccc;
     text-align: center;
+    transition: color 0.2s;
 }
 
 .wordcount.low {
     color: #f88;
+    transition: color 0.2s;
 }
